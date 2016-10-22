@@ -10,6 +10,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get install -y --force-yes rabbitmq-server=3.6.5-1 && \
     rabbitmq-plugins enable rabbitmq_management && \
+    rabbitmq-plugins enable rabbitmq_jms_topic_exchange && \
     service rabbitmq-server stop && \
     apt-get install --yes runit && \
     apt-get clean && \
