@@ -1,5 +1,8 @@
-FROM frodenas/ubuntu
-MAINTAINER Joy Bhattacharjee <joyahan01@gmail.com>
+FROM srinivasachalla/docker-ubuntu
+MAINTAINER Srinivasa Reddy Challa <srinivasa.challa@sap.com>
+
+## Install wget
+RUN apt-get install wget
 
 # Install RabbitMQ 3.6.5-1
 RUN DEBIAN_FRONTEND=noninteractive && \
@@ -10,8 +13,8 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
     dpkg -i erlang-solutions_1.0_all.deb && \
     apt-get update && \
-    apt-get -y install socat erlang-nox=1:19.3-1 && \
-    apt-get install -y --force-yes rabbitmq-server=3.6.9-1 && \
+    apt-get -y install esl-erlang=1:19.3 && \
+    apt-get install -y --force-yes rabbitmq-server=3.6.10-1 && \
     rabbitmq-plugins enable rabbitmq_management && \
     rabbitmq-plugins enable rabbitmq_jms_topic_exchange && \
     service rabbitmq-server stop && \
@@ -19,6 +22,8 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+## remove wget
+RUN apt-get remove wget -y
 # Add scripts
 ADD scripts /scripts
 RUN chmod +x /scripts/*.sh
