@@ -1,12 +1,12 @@
 FROM srinivasachalla/docker-ubuntu
 MAINTAINER Srinivasa Reddy Challa <srinivasa.challa@sap.com>
 
-## Install wget
-RUN apt-get install wget
 
-# Install RabbitMQ 3.6.5-1
+# Install wget, erlang 19.3 & RabbitMQ 3.6.15-1
 RUN DEBIAN_FRONTEND=noninteractive && \
     cd /tmp && \
+    apt-get update && \
+    apt-get install wget && \
     wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc && \
     apt-key add rabbitmq-signing-key-public.asc && \
     echo "deb http://www.rabbitmq.com/debian/ testing main" | tee /etc/apt/sources.list.d/rabbitmq.list && \
@@ -14,7 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     dpkg -i erlang-solutions_1.0_all.deb && \
     apt-get update && \
     apt-get -y install esl-erlang=1:19.3 && \
-    apt-get install -y --force-yes rabbitmq-server=3.6.10-1 && \
+    apt-get install -y --force-yes rabbitmq-server=3.6.15-1 && \
     rabbitmq-plugins enable rabbitmq_management && \
     rabbitmq-plugins enable rabbitmq_jms_topic_exchange && \
     service rabbitmq-server stop && \
