@@ -8,6 +8,7 @@ echo "Configuring base dir for mnesia and log as /data"
 mkdir -p /data/rabbitmq/log
 mkdir -p /data/rabbitmq/mnesia
 chown -R rabbitmq:rabbitmq /data
+chown -R rabbitmq:rabbitmq /var/lib/rabbitmq/
 cat > /etc/rabbitmq/rabbitmq-env.conf <<EOF
 MNESIA_BASE=/data/rabbitmq/mnesia
 LOG_BASE=/data/rabbitmq/log

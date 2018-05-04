@@ -2,19 +2,20 @@ FROM srinivasachalla/docker-ubuntu
 MAINTAINER Srinivasa Reddy Challa <srinivasa.challa@sap.com>
 
 
-# Install wget, erlang 19.3 & RabbitMQ 3.6.15-1
+# Install wget, erlang 20.3 & RabbitMQ 3.7.4
 RUN DEBIAN_FRONTEND=noninteractive && \
     cd /tmp && \
     apt-get update && \
     apt-get install wget && \
-    wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc && \
-    apt-key add rabbitmq-signing-key-public.asc && \
-    echo "deb http://www.rabbitmq.com/debian/ testing main" | tee /etc/apt/sources.list.d/rabbitmq.list && \
-    wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
-    dpkg -i erlang-solutions_1.0_all.deb && \
+    wget https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc && \
+    apt-key add rabbitmq-release-signing-key.asc && \
+    echo "deb http://dl.bintray.com/rabbitmq/debian jessie rabbitmq-server-v3.7.x" | tee /etc/apt/sources.list.d/rabbitmq.list && \
+    wget https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc && \
+    apt-key add erlang_solutions.asc && \
+    echo "deb http://packages.erlang-solutions.com/debian jessie contrib" | tee /etc/apt/sources.list.d/erlang.list && \
     apt-get update && \
-    apt-get -y install esl-erlang=1:19.3 && \
-    apt-get install -y --force-yes rabbitmq-server=3.6.15-1 && \
+    apt-get -y install esl-erlang=1:20.3 && \
+    apt-get install -y --force-yes rabbitmq-server=3.7.4-1 && \
     rabbitmq-plugins enable rabbitmq_management && \
     rabbitmq-plugins enable rabbitmq_jms_topic_exchange && \
     rabbitmq-plugins enable rabbitmq_stomp && \
