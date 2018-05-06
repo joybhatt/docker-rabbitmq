@@ -9,10 +9,9 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get install wget && \
     wget https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc && \
     apt-key add rabbitmq-release-signing-key.asc && \
-    echo "deb http://dl.bintray.com/rabbitmq/debian jessie rabbitmq-server-v3.7.x" | tee /etc/apt/sources.list.d/rabbitmq.list && \
-    wget https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc && \
-    apt-key add erlang_solutions.asc && \
-    echo "deb http://packages.erlang-solutions.com/debian jessie contrib" | tee /etc/apt/sources.list.d/erlang.list && \
+    echo "deb http://dl.bintray.com/rabbitmq/debian trusty main" | tee /etc/apt/sources.list.d/rabbitmq.list && \
+    wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
+    dpkg -i erlang-solutions_1.0_all.deb && \
     apt-get update && \
     apt-get -y install esl-erlang=1:20.3 && \
     apt-get install -y --force-yes rabbitmq-server=3.7.4-1 && \
