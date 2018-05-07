@@ -7,4 +7,4 @@ fi
 
 # Start RabbitMQ
 echo "Starting RabbitMQ..."
-exec chpst /usr/sbin/rabbitmq-server
+exec sudo chpst /usr/sbin/rabbitmq-server
