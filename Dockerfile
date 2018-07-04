@@ -19,6 +19,8 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     rabbitmq-plugins enable rabbitmq_jms_topic_exchange && \
     rabbitmq-plugins enable rabbitmq_stomp && \
     rabbitmq-plugins enable rabbitmq_web_stomp && \
+    rabbitmq-plugins enable rabbitmq_mqtt && \
+    rabbitmq-plugins enable rabbitmq_web_mqtt && \
     service rabbitmq-server stop && \
     apt-get install --yes runit && \
     apt-get clean && \
@@ -40,6 +42,8 @@ EXPOSE 5672
 EXPOSE 15672
 EXPOSE 61613
 EXPOSE 15674
+EXPOSE 1883
+EXPOSE 15675
 
 # Expose our log volumes
 VOLUME ["/data"]
