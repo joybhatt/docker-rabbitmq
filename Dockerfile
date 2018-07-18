@@ -2,7 +2,7 @@ FROM srinivasachalla/docker-ubuntu
 MAINTAINER Srinivasa Reddy Challa <srinivasa.challa@sap.com>
 
 
-# Install wget, erlang 20.3 & RabbitMQ 3.7.4
+# Install wget, erlang 20.3 & RabbitMQ 3.7.7
 RUN DEBIAN_FRONTEND=noninteractive && \
     cd /tmp && \
     apt-get update && \
@@ -14,13 +14,14 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     dpkg -i erlang-solutions_1.0_all.deb && \
     apt-get update && \
     apt-get -y install esl-erlang=1:20.3 && \
-    apt-get install -y --force-yes rabbitmq-server=3.7.4-1 && \
+    apt-get install -y --force-yes rabbitmq-server=3.7.7-1 && \
     rabbitmq-plugins enable rabbitmq_management && \
     rabbitmq-plugins enable rabbitmq_jms_topic_exchange && \
     rabbitmq-plugins enable rabbitmq_stomp && \
     rabbitmq-plugins enable rabbitmq_web_stomp && \
     rabbitmq-plugins enable rabbitmq_mqtt && \
     rabbitmq-plugins enable rabbitmq_web_mqtt && \
+    rabbitmq-plugins enable rabbitmq_amqp1_0 && \
     service rabbitmq-server stop && \
     apt-get install --yes runit && \
     apt-get clean && \
